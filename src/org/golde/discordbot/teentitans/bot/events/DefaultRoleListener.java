@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 
 public class DefaultRoleListener extends EventBase implements ICanHasDatabaseFile {
 
-	private NamesDB names;
+	private static NamesDB names;
 	
 	public DefaultRoleListener(AbstractTeenTitanBot bot) {
 		super(bot);
@@ -24,11 +24,11 @@ public class DefaultRoleListener extends EventBase implements ICanHasDatabaseFil
 	
 	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+		assignName(event.getGuild(), event.getMember());
+	}
+	
+	public static void assignName(Guild g, Member mem) {
 		
-		Member mem = event.getMember();
-		Guild g = event.getGuild();
-		
-		//g.addRoleToMember(mem.getIdLong(), g.getRoleById(Roles.HONORARY_TITANS)).queue();
 		
 		String pickedName = ArrayUtil.getRandomObjectFromArray(names.remaining);
 		names.remaining.remove(pickedName);
@@ -39,7 +39,6 @@ public class DefaultRoleListener extends EventBase implements ICanHasDatabaseFil
 		mem.modifyNickname(pickedName).queue(success -> {
 			g.getTextChannelById(Channels.TextChannels.TITANS_TOWER).sendMessage("Welcome to the Teen Titans Guild " + mem.getAsMention() + "!").queue();
 		});
-		
 	}
 
 	@Override

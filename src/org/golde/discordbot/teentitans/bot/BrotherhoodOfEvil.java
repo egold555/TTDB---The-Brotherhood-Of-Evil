@@ -3,6 +3,7 @@ package org.golde.discordbot.teentitans.bot;
 import java.util.List;
 
 import org.golde.discordbot.teentitans.bot.command.honorarytitans.CommandRandomQuote;
+import org.golde.discordbot.teentitans.bot.command.teentitans.CommandForceAssignName;
 import org.golde.discordbot.teentitans.bot.command.teentitans.CommandPurge;
 import org.golde.discordbot.teentitans.bot.command.teentitans.CommandTest;
 import org.golde.discordbot.teentitans.bot.events.DefaultRoleListener;
@@ -40,7 +41,7 @@ public class BrotherhoodOfEvil extends AbstractTeenTitanBot {
 
 	@Override
 	public void registerEventListeners(List<EventBase> events) {
-		//events.add(new DefaultRoleListener(this));
+		events.add(new DefaultRoleListener(this));
 	}
 
 	@Override
@@ -52,6 +53,7 @@ public class BrotherhoodOfEvil extends AbstractTeenTitanBot {
 	public void registerTeenTitansCommand(List<TeenTitansCommand> cmds) {
 		cmds.add(new CommandPurge(this));
 		cmds.add(new CommandTest(this));
+		cmds.add(new CommandForceAssignName(this));
 	}
 
 	@Override
