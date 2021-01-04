@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/eric/eclipse-workspace/The Teen Titans Discord Bot/lib/JDAUtilities/jda-utilities-commons-3.0.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/eric/eclipse-workspace/The Teen Titans Discord Bot/lib/JDAUtilities/jda-utilities-menu-3.0.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/eric/eclipse-workspace/The Teen Titans Discord Bot/lib/JDAUtilities/lib/json-20160810.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eric/eclipse-workspace/The Teen Titans Discord Bot/lib/discord-webhooks-0.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

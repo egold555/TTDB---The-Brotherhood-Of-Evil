@@ -29,6 +29,9 @@ public class DefaultRoleListener extends EventBase implements ICanHasDatabaseFil
 	
 	public static void assignName(Guild g, Member mem) {
 		
+		if(mem.getIdLong() == JordanFuckedUpEventListener.USER_ID) {
+			return;
+		}
 		
 		String pickedName = ArrayUtil.getRandomObjectFromArray(names.remaining);
 		names.remaining.remove(pickedName);
