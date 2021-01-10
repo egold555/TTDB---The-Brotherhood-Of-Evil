@@ -8,6 +8,7 @@ import org.golde.discordbot.teentitans.bot.command.teentitans.CommandPurge;
 import org.golde.discordbot.teentitans.bot.command.teentitans.CommandTest;
 import org.golde.discordbot.teentitans.bot.events.DefaultRoleListener;
 import org.golde.discordbot.teentitans.bot.events.JordanFuckedUpEventListener;
+import org.golde.discordbot.teentitans.bot.events.MinecraftServerPinger;
 import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.command.honorarytitans.HonoraryTitansCommand;
 import org.golde.discordbot.teentitans.shared.command.rosequartz.RoseQuartzCommand;
@@ -27,7 +28,7 @@ public class BrotherhoodOfEvil extends AbstractTeenTitanBot {
 
 	@Override
 	public void onReady() {
-		
+		new MinecraftServerPinger(this).run();
 	}
 
 	@Override
@@ -42,8 +43,8 @@ public class BrotherhoodOfEvil extends AbstractTeenTitanBot {
 
 	@Override
 	public void registerEventListeners(List<EventBase> events) {
-		events.add(new DefaultRoleListener(this));
-		events.add(new JordanFuckedUpEventListener(this));
+		//events.add(new DefaultRoleListener(this));
+		//events.add(new JordanFuckedUpEventListener(this));
 	}
 
 	@Override
