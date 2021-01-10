@@ -18,7 +18,6 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -49,6 +48,56 @@ public abstract class BaseCommand extends Command {
 		return bot.getPrefix() + this.name + " " + this.arguments;
 	}
 
+	protected void tryToDmUser(Member member, MessageEmbed embed) {
+		tryToDmUser(member, embed, null);
+	}
+	protected void tryToDmUser(Member member, MessageEmbed embed, Runnable onFinishedTrying) {
+
+		if(member == null || member.getUser() == null || member.getUser().isBot() || member.getUser().isFake()) {
+
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+
+			return;
+		}
+
+		member.getUser().openPrivateChannel().queue((dmChannel) ->
+		{
+			dmChannel.sendMessage(embed).queue(sucess -> {if(onFinishedTrying != null) {onFinishedTrying.run();}}, fail -> {if(onFinishedTrying != null) {onFinishedTrying.run();}});
+
+		}, fail -> {
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+		});
+	}
+
+	protected void tryToDmUser(Member member, String msg) {
+		tryToDmUser(member, msg, null);
+	}
+	protected void tryToDmUser(Member member, String msg, Runnable onFinishedTrying) {
+
+		if(member == null || member.getUser() == null || member.getUser().isBot() || member.getUser().isFake()) {
+
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+
+			return;
+		}
+
+		member.getUser().openPrivateChannel().queue((dmChannel) ->
+		{
+			dmChannel.sendMessage(msg).queue(sucess -> {if(onFinishedTrying != null) {onFinishedTrying.run();}}, fail -> {if(onFinishedTrying != null) {onFinishedTrying.run();}});
+
+		}, fail -> {
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+		});
+	}
+
 	/**
 	 * Gets a member from a given String array and index
 	 * @param evt The command event 
@@ -56,25 +105,35 @@ public abstract class BaseCommand extends Command {
 	 * @param expecting The index of the array where we expect the user to reside
 	 * @return The member at the index, or null if none is found
 	 */
-	protected Member getMember(CommandEvent evt, List<String> args, int expecting) {
-		Guild guild = evt.getGuild();
+	protected Long getMember(CommandEvent event, List<String> args, int expecting) {
 
 		if(args.size()-1 < expecting) {return null;}
 
 		try {
 			String id = args.get(expecting);
-			id = id.replace("<@!", "").replace(">", "").trim();
+			id = id.replace("<@!", "").replace("<@", "").replace(">", "").trim();
 
-			//System.out.println(id);
-			
-			return guild.getMemberById(id);
+			return Long.parseLong(id);
 
 		}
 		catch(NumberFormatException ignored) {}
 
 		return null;
 	}
-	
+
+	@Deprecated
+	protected Member getMemberOLD(CommandEvent event, List<String> args, int expecting) {
+
+		Long member = getMember(event, args, expecting);
+
+		if(member == null) {
+			return null;
+		}
+
+		return event.getGuild().getMemberById(member);
+
+	}
+
 	protected final EmbedBuilder getReplyEmbedRaw(EnumReplyType type, String title, String desc) {
 
 		EmbedBuilder builder = new EmbedBuilder();
@@ -94,9 +153,13 @@ public abstract class BaseCommand extends Command {
 	protected final MessageEmbed getReplyEmbed(EnumReplyType type, String title, String desc) {
 		return getReplyEmbedRaw(type, title, desc).build();
 	}
-	
+
 	protected void reply(MessageChannel channel, EmbedBuilder builder) {
-		channel.sendMessage(builder.build()).queue();
+		reply(channel, builder.build());
+	}
+
+	protected void reply(MessageChannel channel, MessageEmbed embed) {
+		channel.sendMessage(embed).queue();
 	}
 
 	private void reply(MessageChannel channel, EnumReplyType type, String title, String desc) {
@@ -105,7 +168,7 @@ public abstract class BaseCommand extends Command {
 
 	private void reply(MessageChannel channel, EnumReplyType type, String title, String desc, int secondsUntilDelete, Consumer<Void> finished) {
 		if(secondsUntilDelete > 0) {
-			desc += "\n\n*This message will automatically self distruct in " + secondsUntilDelete + " seconds.*";
+			desc += "\n\n*This message will automatically self destruct in " + secondsUntilDelete + " seconds.*";
 		}
 		channel.sendMessage(getReplyEmbed(type, title, desc)).queue(success -> {
 			try {
@@ -238,8 +301,6 @@ public abstract class BaseCommand extends Command {
 
 		//delete their command
 		//event.getMessage().delete().queue();
-
-		execute(event, toPass);
 
 	}
 

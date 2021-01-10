@@ -10,6 +10,7 @@ import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.util.EnumReplyType;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -20,7 +21,56 @@ public abstract class EventBase extends ListenerAdapter {
 	public EventBase(@Nonnull AbstractTeenTitanBot bot) {
 		this.bot = bot;
 	}
-	
+
+	protected static void tryToDmUser(Member member, MessageEmbed embed) {
+		tryToDmUser(member, embed, null);
+	}
+	protected static void tryToDmUser(Member member, MessageEmbed embed, Runnable onFinishedTrying) {
+		if(member == null || member.getUser() == null || member.getUser().isBot() || member.getUser().isFake()) {
+
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+
+			return;
+		}
+
+		member.getUser().openPrivateChannel().queue((dmChannel) ->
+		{
+			dmChannel.sendMessage(embed).queue(sucess -> {if(onFinishedTrying != null) {onFinishedTrying.run();}}, fail -> {if(onFinishedTrying != null) {onFinishedTrying.run();}});
+
+		}, fail -> {
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+		});
+	}
+
+	protected static void tryToDmUser(Member member, String msg) {
+		tryToDmUser(member, msg, null);
+	}
+	protected static void tryToDmUser(Member member, String msg, Runnable onFinishedTrying) {
+
+		if(member == null || member.getUser() == null || member.getUser().isBot() || member.getUser().isFake()) {
+
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+
+			return;
+		}
+
+		member.getUser().openPrivateChannel().queue((dmChannel) ->
+		{
+			dmChannel.sendMessage(msg).queue(sucess -> {if(onFinishedTrying != null) {onFinishedTrying.run();}}, fail -> {if(onFinishedTrying != null) {onFinishedTrying.run();}});
+
+		}, fail -> {
+			if(onFinishedTrying != null) {
+				onFinishedTrying.run();
+			}
+		});
+	}
+
 	protected final MessageEmbed getReplyEmbed(EnumReplyType type, String title, String desc) {
 
 		EmbedBuilder builder = new EmbedBuilder();
@@ -43,7 +93,7 @@ public abstract class EventBase extends ListenerAdapter {
 
 	private void reply(MessageChannel channel, EnumReplyType type, String title, String desc, int secondsUntilDelete, Consumer<Void> finished) {
 		if(secondsUntilDelete > 0) {
-			desc += "\n\n*This message will automatically self distruct in " + secondsUntilDelete + " seconds.*";
+			desc += "\n\n*This message will automatically self destruct in " + secondsUntilDelete + " seconds.*";
 		}
 		channel.sendMessage(getReplyEmbed(type, title, desc)).queue(success -> {
 			try {
@@ -161,5 +211,5 @@ public abstract class EventBase extends ListenerAdapter {
 	public void reply(MessageChannel channel, String title, String desc, int secondsUntilDelete, Consumer<Void> finished) {
 		reply(channel, EnumReplyType.NONE, title, desc, secondsUntilDelete, finished);
 	}
-	
+
 }

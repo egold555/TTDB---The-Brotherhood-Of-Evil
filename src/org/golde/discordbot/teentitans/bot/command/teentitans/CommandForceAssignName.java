@@ -20,13 +20,13 @@ public class CommandForceAssignName extends TeenTitansCommand {
 
 	
 	public CommandForceAssignName(AbstractTeenTitanBot bot) {
-		super(bot, "forceAssignName", "<member>", "Incase I mess up again");
+		super(bot, "assignRandomName", "<member>", "Randomly assign a name");
 	}
 
 	@Override
 	protected void execute(CommandEvent event, List<String> args) {
 		
-		Member m = getMember(event, args, 1);
+		Member m = getMemberOLD(event, args, 1);
 		Guild g = event.getGuild();
 		TextChannel tc = event.getTextChannel();
 		
