@@ -2,13 +2,15 @@ package org.golde.discordbot.teentitans.bot;
 
 import java.util.List;
 
+import org.golde.discordbot.teentitans.bot.command.honorarytitans.CommandMC;
 import org.golde.discordbot.teentitans.bot.command.honorarytitans.CommandRandomQuote;
 import org.golde.discordbot.teentitans.bot.command.teentitans.CommandForceAssignName;
 import org.golde.discordbot.teentitans.bot.command.teentitans.CommandPurge;
 import org.golde.discordbot.teentitans.bot.command.teentitans.CommandTest;
 import org.golde.discordbot.teentitans.bot.events.DefaultRoleListener;
+import org.golde.discordbot.teentitans.bot.events.EventWhyTheFuck;
 import org.golde.discordbot.teentitans.bot.events.JordanFuckedUpEventListener;
-import org.golde.discordbot.teentitans.bot.events.MinecraftServerPinger;
+import org.golde.discordbot.teentitans.bot.minecraft.CachedMCServerPinger;
 import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.command.honorarytitans.HonoraryTitansCommand;
 import org.golde.discordbot.teentitans.shared.command.rosequartz.RoseQuartzCommand;
@@ -28,28 +30,29 @@ public class BrotherhoodOfEvil extends AbstractTeenTitanBot {
 
 	@Override
 	public void onReady() {
-		new MinecraftServerPinger(this).run();
+		CachedMCServerPinger.getInstance().run();
 	}
 
 	@Override
 	public void onLoad() {
-		
+
 	}
 
 	@Override
 	public void onReload() {
-		
+
 	}
 
 	@Override
 	public void registerEventListeners(List<EventBase> events) {
-		//events.add(new DefaultRoleListener(this));
-		//events.add(new JordanFuckedUpEventListener(this));
+		events.add(new DefaultRoleListener(this));
+		events.add(new JordanFuckedUpEventListener(this));
 	}
 
 	@Override
 	public void registerHonoraryTitansCommand(List<HonoraryTitansCommand> cmds) {
 		cmds.add(new CommandRandomQuote(this));
+		cmds.add(new CommandMC(this));
 	}
 
 	@Override
