@@ -120,8 +120,8 @@ public class CommandMC extends HonoraryTitansCommand implements ICanHasDatabaseF
 		Boolean oldOnline = isOnlineBecauseAternosIsStrange(oldCache);
 		Boolean newOnline = isOnlineBecauseAternosIsStrange(newCache);
 
-		System.out.println(oldCache + " " + newCache);
-		System.out.println(oldOnline + " " + newOnline);
+//		System.out.println(oldCache + " " + newCache);
+//		System.out.println(oldOnline + " " + newOnline);
 
 		if((oldOnline != newOnline)) {
 			//ping members, the server is online
