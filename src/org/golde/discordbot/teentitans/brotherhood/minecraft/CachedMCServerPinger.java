@@ -1,4 +1,4 @@
-package org.golde.discordbot.teentitans.bot.minecraft;
+package org.golde.discordbot.teentitans.brotherhood.minecraft;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 import javax.annotation.Nullable;
 
-import org.golde.discordbot.teentitans.bot.BrotherhoodOfEvil;
+import org.golde.discordbot.teentitans.brotherhood.BrotherhoodOfEvil;
 import org.golde.discordbot.teentitans.shared.constants.Channels;
 
 import lombok.Getter;
@@ -67,7 +67,6 @@ public class CachedMCServerPinger {
 	
 	private static PingResponse getNonNullPing() {
 		PingResponse nonNull = new PingResponse();
-		nonNull.setPing(-1);
 		return nonNull;
 	}
 	

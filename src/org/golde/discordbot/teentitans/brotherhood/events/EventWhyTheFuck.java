@@ -1,4 +1,4 @@
-package org.golde.discordbot.teentitans.bot.events;
+package org.golde.discordbot.teentitans.brotherhood.events;
 
 import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.event.EventBase;

@@ -1,4 +1,4 @@
-package org.golde.discordbot.teentitans.bot.minecraft;
+package org.golde.discordbot.teentitans.brotherhood.minecraft;
 
 import lombok.Builder;
 import lombok.Getter;

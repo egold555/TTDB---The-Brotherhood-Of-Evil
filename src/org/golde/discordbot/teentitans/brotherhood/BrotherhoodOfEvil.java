@@ -1,16 +1,16 @@
-package org.golde.discordbot.teentitans.bot;
+package org.golde.discordbot.teentitans.brotherhood;
 
 import java.util.List;
 
-import org.golde.discordbot.teentitans.bot.command.honorarytitans.CommandMC;
-import org.golde.discordbot.teentitans.bot.command.honorarytitans.CommandRandomQuote;
-import org.golde.discordbot.teentitans.bot.command.teentitans.CommandForceAssignName;
-import org.golde.discordbot.teentitans.bot.command.teentitans.CommandPurge;
-import org.golde.discordbot.teentitans.bot.command.teentitans.CommandTest;
-import org.golde.discordbot.teentitans.bot.events.DefaultRoleListener;
-import org.golde.discordbot.teentitans.bot.events.EventWhyTheFuck;
-import org.golde.discordbot.teentitans.bot.events.JordanFuckedUpEventListener;
-import org.golde.discordbot.teentitans.bot.minecraft.CachedMCServerPinger;
+import org.golde.discordbot.teentitans.brotherhood.command.honorarytitans.CommandMC;
+import org.golde.discordbot.teentitans.brotherhood.command.honorarytitans.CommandRandomQuote;
+import org.golde.discordbot.teentitans.brotherhood.command.teentitans.CommandForceAssignName;
+import org.golde.discordbot.teentitans.brotherhood.command.teentitans.CommandPurge;
+import org.golde.discordbot.teentitans.brotherhood.command.teentitans.CommandTest;
+import org.golde.discordbot.teentitans.brotherhood.events.DefaultRoleListener;
+import org.golde.discordbot.teentitans.brotherhood.events.EventWhyTheFuck;
+import org.golde.discordbot.teentitans.brotherhood.events.JordanFuckedUpEventListener;
+import org.golde.discordbot.teentitans.brotherhood.minecraft.CachedMCServerPinger;
 import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.command.honorarytitans.HonoraryTitansCommand;
 import org.golde.discordbot.teentitans.shared.command.rosequartz.RoseQuartzCommand;

@@ -1,12 +1,12 @@
-package org.golde.discordbot.teentitans.bot.command.honorarytitans;
+package org.golde.discordbot.teentitans.brotherhood.command.honorarytitans;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.golde.discordbot.teentitans.bot.minecraft.CachedMCServerPinger;
-import org.golde.discordbot.teentitans.bot.minecraft.CachedMCServerPinger.InstanceChangeListener;
-import org.golde.discordbot.teentitans.bot.minecraft.PingResponse;
+import org.golde.discordbot.teentitans.brotherhood.minecraft.CachedMCServerPinger;
+import org.golde.discordbot.teentitans.brotherhood.minecraft.PingResponse;
+import org.golde.discordbot.teentitans.brotherhood.minecraft.CachedMCServerPinger.InstanceChangeListener;
 import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.command.ICanHasDatabaseFile;
 import org.golde.discordbot.teentitans.shared.command.honorarytitans.HonoraryTitansCommand;

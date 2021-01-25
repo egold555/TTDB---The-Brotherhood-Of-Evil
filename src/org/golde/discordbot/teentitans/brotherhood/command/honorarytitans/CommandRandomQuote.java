@@ -1,4 +1,4 @@
-package org.golde.discordbot.teentitans.bot.command.honorarytitans;
+package org.golde.discordbot.teentitans.brotherhood.command.honorarytitans;
 
 import java.util.ArrayList;
 import java.util.List;

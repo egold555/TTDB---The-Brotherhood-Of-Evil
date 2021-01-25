@@ -1,8 +1,8 @@
-package org.golde.discordbot.teentitans.bot.command.teentitans;
+package org.golde.discordbot.teentitans.brotherhood.command.teentitans;
 
 import java.util.List;
 
-import org.golde.discordbot.teentitans.bot.BrotherhoodOfEvil;
+import org.golde.discordbot.teentitans.brotherhood.BrotherhoodOfEvil;
 import org.golde.discordbot.teentitans.shared.AbstractTeenTitanBot;
 import org.golde.discordbot.teentitans.shared.command.ICanHasDatabaseFile;
 import org.golde.discordbot.teentitans.shared.command.teentitans.TeenTitansCommand;

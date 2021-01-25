@@ -1,4 +1,4 @@
-package org.golde.discordbot.teentitans.bot.events;
+package org.golde.discordbot.teentitans.brotherhood.events;
 
 import java.util.List;
 
