@@ -24,6 +24,7 @@ public class CachedMCServerPinger {
 	
 	public static final String SERVER_IP = "rjd_gamer.aternos.me";
 	//public static final String SERVER_IP = "jumpcraft.mcalias.com"; //testing IP
+	//public static final String SERVER_IP = "192.168.1.247"; //testing IP
 	
 	@Nullable @Setter private InstanceChangeListener changeListener; //should be a list
 	
@@ -59,7 +60,7 @@ public class CachedMCServerPinger {
 			this.currentCache = newCache;
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			changeListener.onCacheChanged(this.currentCache, getNonNullPing());
 			this.currentCache = getNonNullPing();
 		}

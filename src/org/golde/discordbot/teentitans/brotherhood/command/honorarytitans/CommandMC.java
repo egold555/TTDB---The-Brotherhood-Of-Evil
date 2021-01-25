@@ -123,7 +123,7 @@ public class CommandMC extends HonoraryTitansCommand implements ICanHasDatabaseF
 //		System.out.println(oldCache + " " + newCache);
 //		System.out.println(oldOnline + " " + newOnline);
 
-		if((oldOnline != newOnline)) {
+		if((oldOnline != newOnline) && !oldOnline) {
 			//ping members, the server is online
 
 			Guild g = bot.getGuild();
@@ -136,12 +136,11 @@ public class CommandMC extends HonoraryTitansCommand implements ICanHasDatabaseF
 
 			String allUsers = String.join(", ", mentionable);
 			 
-			if(allUsers == null || allUsers.isEmpty()) {
-				allUsers = "Nobody";
+			if(allUsers != null && !allUsers.isEmpty()) {
+				g.getTextChannelById(Channels.TextChannels.MINECRAFT).sendMessage("Hey " + allUsers + " : The server is up!").queue();
 			}
 
-			g.getTextChannelById(Channels.TextChannels.MINECRAFT).sendMessage("Hey " + allUsers + " : The server is up!").queue();;
-
+			
 		}
 
 	}
